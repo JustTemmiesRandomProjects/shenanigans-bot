@@ -34,25 +34,9 @@ for filename in os.listdir('./cogs'):
   
 @tasks.loop(minutes=15)
 async def change_status_task():
-  with open("data/leaderboard.json", "r") as f:
-        data = json.load(f)
-        
-  a = 0
-  pin_list = []
-        
-  for x in data:
-      pin_list.append({int(data[x]['pins']), int(x)})
-  
-  for x in pin_list:
-      pin_list[a] = sorted(pin_list[a], reverse=False)
-      a += 1
-      
-  pin_list = sorted(pin_list, reverse=True)
-  
-  status = pin_list[0][1]
   await bot.change_presence(status=discord.Status.idle,
   activity=discord.Activity(type=discord.ActivityType.watching, 
-  name=(status)))
+  name=("beavers")))
 
 
 bot.run((TOKEN), bot=True, reconnect=True)
