@@ -38,9 +38,9 @@ class events(commands.Cog):
             
             change = 1
  
-        await self.open_db(author_id)
-        await self.get_data()
-        await self.update_data(author_id, change)
+            await self.open_db(author_id)
+            #await self.get_data()
+            await self.update_data(author_id, change)
             
     
     @commands.command()
