@@ -53,7 +53,6 @@ async def change_status_task():
   await bot.change_presence(status=discord.Status.idle,
   activity=discord.Activity(type=discord.ActivityType.watching, 
   name=(status)))
-  await bot.status_out.send(f"status changed to \"{status}\"")
 
 
 bot.run((TOKEN), bot=True, reconnect=True)
