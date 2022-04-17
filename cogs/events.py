@@ -17,39 +17,30 @@ class events(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_message_edit(self, payload):
         author_id = payload.data['author']['id']
-        author = self.bot.get_user(payload.data['author']['id'])
+        #author = self.bot.get_user(payload.data['author']['id'])
         message_id = payload.data['id']
         is_pinned = payload.data['pinned']
+        
+        change = 0
         
         with open("data/pinned_messages.json", "r") as f:
             data = json.load(f)
         
-        print(data['messages'])
         
         for x in data['messages']:
             if int(x) == int(message_id):
                 return
 
-
-        print("new message")
-        
-        # TO BE DONE
-        # add new message id to pinned_messages.json
-        # port code below to new code
-    
-        return
-        
-        print(is_pinned)
-        
-        change = 0
-        
-        
-        
-        print(change)
-        print(author)
-        await self.open_db(author)
+        if is_pinned:
+            data['messages'].append(int(message_id))
+            with open("data/pinned_messages.json", "w") as f:
+                json.dump(data, f)
+            
+            change = 1
+ 
+        await self.open_db(author_id)
         await self.get_data()
-        await self.update_data(author, change)
+        await self.update_data(author_id, change)
             
     
     @commands.command()
@@ -78,7 +69,6 @@ class events(commands.Cog):
         pin_list = []
         
         for x in data:
-            print(data[x]['pins'])
             pin_list.append({int(data[x]['pins']), int(x)})
         
         for x in pin_list:
