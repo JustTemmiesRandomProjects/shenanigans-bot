@@ -96,11 +96,11 @@ class events(commands.Cog):
             if pins != 1:
                 pin_string = "pins"
             
-            if n % 10 == 1:
+            if n == 1:
                 placement = "st"
-            elif n % 10 == 2:
+            elif n == 2:
                 placement = "nd"
-            elif n % 10 == 3:
+            elif n == 3:
                 placement = "rd"
             else:
                 placement = "th"
