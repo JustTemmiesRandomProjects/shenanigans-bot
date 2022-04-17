@@ -105,7 +105,7 @@ class events(commands.Cog):
             else:
                 placement = "th"
             
-            info += (str(n) + f"{placement} - " + f"{person.mention} with " + str(pins) + f" {pin_string}\n")
+            info += (str(n) + f"{placement} - {person.mention} with {str(pins)} {pin_string}\n")
             
             n += 1
         
