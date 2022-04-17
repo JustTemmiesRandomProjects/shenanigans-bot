@@ -36,7 +36,8 @@ for filename in os.listdir('./cogs'):
 async def change_status_task():
   with open("data/leaderboard.json", "r") as f:
         data = json.load(f)
-  
+        
+  a = 0
   pin_list = []
         
   for x in data:
