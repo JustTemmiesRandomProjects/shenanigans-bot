@@ -32,27 +32,6 @@ class Owner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.is_owner()
-    @commands.command(name="mepurge", brief="Clears messages equal to the amount specified ")
-    @bot_has_permissions(manage_messages=True)
-    async def purge(self, ctx, amount = 0, shut = "shutupplz"):
-        if amount == 0:
-            await ctx.send("please specifiy an amount")
-            return
-        if 0 < amount <= 250:
-            channel = ctx.message.channel
-            messages = []
-            async for message in channel.history(limit=amount + 1):
-                      messages.append(message)
-
-            await channel.delete_messages(messages)
-            if shut == "shutupplz":
-                await ctx.send(f'{amount} messages have been purged by {ctx.message.author.mention}', delete_after=10)
-            else:
-                pass
-
-        else:
-            await ctx.send("The limit provided is not within acceptable bounds.")
           
     @commands.is_owner()
     @commands.command()
@@ -114,24 +93,6 @@ class Owner(commands.Cog):
           await ctx.send(f"```py\n{error}```")
           return
     
-    
-    @commands.is_owner()
-    @commands.command(name="addtofunny", aliases=['atf','makefunny','shitpostadd','addshitpost','jsonadd','addjson'], brief="adds the specified thing to shitpost.json")
-    async def addtofunnylist(ctx, *, funny = None):
-        with open("./data/shitpost.json", "r") as f:
-            shitposts = json.load(f)
-        
-        if funny is None:
-            print("funny is None")
-            await ctx.send("funny is `None`")
-            
-        shitposts["list"].append(f"{funny}")
-        await ctx.send(f"added {funny} to list")
-        print(f"added {funny} to shitpost index")
-        
-        with open("./data/shitpost.json", "w") as f:
-            json.dump(shitposts, f)
-
 
     @commands.command()
     @commands.is_owner()

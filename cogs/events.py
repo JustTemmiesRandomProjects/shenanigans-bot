@@ -16,12 +16,19 @@ class events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_message_edit(self, payload):
+        channel_id = payload.channel_id
         author_id = payload.data['author']['id']
         #author = self.bot.get_user(payload.data['author']['id'])
         message_id = payload.data['id']
         is_pinned = payload.data['pinned']
         
         change = 0
+        
+        banned_channels = [433115850934059008, 508799314596855858, 585691790519304202, 720198070675046422, 433100607469912065, 540372077266599946, 433117889734639640, 508785153221591051, 514008592634871809]
+        
+        for i in banned_channels:
+            if channel_id == i:
+                return
         
         with open("data/pinned_messages.json", "r") as f:
             data = json.load(f)
@@ -42,6 +49,8 @@ class events(commands.Cog):
             #await self.get_data()
             await self.update_data(author_id, change)
             
+            print(f"{author_id} just got {change} score" )
+            
     
     @commands.command()
     async def leaderboard(self, ctx):
@@ -58,10 +67,13 @@ class events(commands.Cog):
     
     @commands.Cog.listener()
     async def update_leaderboard(self):
-        channel = self.bot.get_channel(628212961218920479) # the message's channel
-        msg_id = 965067100571959387 # the message's id
+        channel = self.bot.get_channel(540368905953214474) # the message's channel
+        msg_id = 965241955162423336 # the message's id
         
         info = ""
+        #get the date in the format of "day month, year"
+        date = datetime.now().strftime("%d %B, %Y")
+
         n = 1
         a = 0
         
@@ -93,13 +105,13 @@ class events(commands.Cog):
             else:
                 placement = "th"
             
-            info += (str(n) + f"{placement} - " + person.display_name + " with " + str(pins) + f" {pin_string}\n")
+            info += (str(n) + f"{placement} - " + f"{person.mention} with " + str(pins) + f" {pin_string}\n")
             
             n += 1
         
         leaderboard = await channel.fetch_message(msg_id)
         await leaderboard.edit(content=
-                f"**Leaderboard:**\n\n{info}")
+                f"**Leaderboard:**\nLast updated: **{date}**\n\n{info}")
         
 
     
