@@ -146,5 +146,5 @@ class Owner(commands.Cog):
             await ctx.send("```py\n>>> {}\n\n\n{}```".format(code, e))
 
 
-def setup(bot):
-    bot.add_cog(Owner(bot))
+async def setup(bot):
+    await bot.add_cog(Owner(bot))
