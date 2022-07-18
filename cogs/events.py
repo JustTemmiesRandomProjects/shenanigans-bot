@@ -73,7 +73,7 @@ class events(commands.Cog):
         
         info = ""
         #get the date in the format of "day month, year"
-        date = datetime.now().strftime("%d %B, %Y")
+        #date = datetime.now().strftime("%d %B, %Y")
 
         n = 1
         a = 0
@@ -112,7 +112,7 @@ class events(commands.Cog):
         
         leaderboard = await channel.fetch_message(msg_id)
         await leaderboard.edit(content=
-                f"**Leaderboard:**\nLast updated: **{date}** <t:{round(time.time())}>\n\n{info}"
+                f"**Leaderboard:**\nLast updated: <t:{round(time.time())}>\n\n{info}"
         )
     @commands.Cog.listener()
     async def open_db(self, author):
