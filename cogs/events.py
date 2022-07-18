@@ -112,7 +112,8 @@ class events(commands.Cog):
         
         leaderboard = await channel.fetch_message(msg_id)
         await leaderboard.edit(content=
-                f"**Leaderboard:**\nLast updated: **{date}**\n\n{info} <t:{round(time.time())}>")
+                f"**Leaderboard:**\nLast updated: **{date}** <t:{round(time.time())}>\n\n{info}"
+        )
     @commands.Cog.listener()
     async def open_db(self, author):
 
