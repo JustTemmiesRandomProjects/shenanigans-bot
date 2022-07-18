@@ -5,6 +5,7 @@ from discord.ext.commands import CommandNotFound, BadArgument, MissingRequiredAr
 import random
 from datetime import datetime
 import json
+import time
 
 IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument)
 
@@ -111,10 +112,7 @@ class events(commands.Cog):
         
         leaderboard = await channel.fetch_message(msg_id)
         await leaderboard.edit(content=
-                f"**Leaderboard:**\nLast updated: **{date}**\n\n{info}")
-        
-
-    
+                f"**Leaderboard:**\nLast updated: **{date}**\n\n{info} <t:{round(time.time())}>")
     @commands.Cog.listener()
     async def open_db(self, author):
 
