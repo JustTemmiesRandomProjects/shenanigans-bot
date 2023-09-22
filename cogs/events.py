@@ -149,6 +149,7 @@ class events(commands.Cog):
 
         with open("data/leaderboard.json", "w") as f:
             json.dump(users, f)
-    
+
+
 async def setup(bot):
     await bot.add_cog(events(bot))
